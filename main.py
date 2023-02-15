@@ -9,8 +9,14 @@
 #TODO SALVATAGGIO SU FILE
 
 from RandomGraph import RandomGraph
+import LinkedList
 
 if __name__ == '__main__':
-    n = 5
+    n = 10
     rg = RandomGraph(n)
-    print(rg)
+    dsl = LinkedList.DisjointSetList()
+    print(rg.vertices.keys())
+    print(rg.edges)
+    result = dsl.connectedComponents(rg)
+    for l in result:
+        l.print()
