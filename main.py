@@ -6,17 +6,22 @@
     #TODO LISTA CON EURISTICA
     #TODO ALBERI
 
-#TODO SALVATAGGIO SU FILE
 
 from RandomGraph import RandomGraph
-import LinkedList
+import DisjointSetList
 
 if __name__ == '__main__':
     n = 10
     rg = RandomGraph(n)
-    dsl = LinkedList.DisjointSetList()
+    #dsl = DisjointSetList.DisjointSetList()
+    dsle = DisjointSetList.DisjointSetListHeuristic()
+    # print(rg.vertices.keys())
+    # print(rg.edges)
+    # result = dsl.connectedComponents(rg)
+    # for l in result:
+    #    l.print()
     print(rg.vertices.keys())
     print(rg.edges)
-    result = dsl.connectedComponents(rg)
+    result = dsle.connectedComponents(rg)
     for l in result:
         l.print()

@@ -3,7 +3,7 @@ from typing import Optional
 
 from RandomGraph import RandomGraph
 
-
+#classe astratta per avere la stessa interfaccia con le tre possibili implemetnazioni
 class DisjointSet(ABC):
     @abstractmethod
     def makeSet(self, x):
