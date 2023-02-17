@@ -25,6 +25,6 @@ def printTreeResults(result):
 
 
 if __name__ == '__main__':
-    n = 200
+    n = 100
     t = Tester(n)
     t.runTests()

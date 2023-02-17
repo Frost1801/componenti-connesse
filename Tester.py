@@ -39,11 +39,15 @@ class Tester:
                 start = timer()
                 result = sets[j].connectedComponents(self.graphs[i])
                 end = timer()
-                results[i].append((result, end - start))
+                if i != 0:
+                    results[i].append((result, end - start + results[i - 1][j][1]))
+                else:
+                    results[i].append((result, end - start))
         self.saveResults(results)
         self.fillResultArray(results)
         self.plotData(0,2)
         self.plotData(2,4)
+        self.plotData(0,4)
 
     def saveResults(self, results):
         with open('times.csv', 'w') as csvfile:
@@ -62,9 +66,10 @@ class Tester:
                 self.resultArray[j].append(results[i][j][1])
 
     def plotData(self, start, stop):
+        colors = ['r', 'b', 'm', 'g']
         n = self.fillXAxis()
         for i in range(start, stop):
-            plt.plot(n, self.resultArray[i])
+            plt.plot(n, self.resultArray[i], "-" + colors[i])
         labels = [self.labels[lb] for lb in range(start, stop)]
         plt.legend(labels, title="Tipologia Disjoint Set")
         plt.xlabel('Number graph nodes')
