@@ -6,14 +6,10 @@
 # TODO LISTA CON EURISTICA
 # TODO ALBERI
 # TODO SALVATAGGIO SU FILE CSV
-import random
 
-import numpy as np
-
-import DisjoinedSetTree
+import DisjointSetTree
 from RandomGraph import RandomGraph
 import DisjointSetList
-import BinaryTree
 
 
 def printCCResults(graph, result):
@@ -22,12 +18,15 @@ def printCCResults(graph, result):
 
     for l in result:
         l.print()
-def printTreeResults (result):
+
+
+def printTreeResults(result):
     for r in result.values():
         print(r.toArray())
 
+
 if __name__ == '__main__':
-    n = 5
+    n = 10
     rg = RandomGraph(n)
 
     dsl = DisjointSetList.DisjointSetList()
@@ -39,8 +38,11 @@ if __name__ == '__main__':
     printCCResults(rg, result1)
     printCCResults(rg, result2)
 
-    dst = DisjoinedSetTree.DisjoinedSetTree()
+    dst = DisjointSetTree.DisjointSetTree()
     result3 = dst.connectedComponents(rg)
     print()
     printTreeResults(result3)
-
+    print()
+    dstp = DisjointSetTree.DisjointSetTreePathCompr()
+    result4 = dstp.connectedComponents(rg)
+    printTreeResults(result4)

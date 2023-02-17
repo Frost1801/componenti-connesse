@@ -6,7 +6,7 @@ class Node:  # rappresenta un nodo dell'albero binario di ricerca
         self.key = key
         self.left = None
         self.right = None
-        self.root = None
+        self.p = None
         self.tree = None
         # left e right sono dichiarati e inizializzati a null
 
@@ -25,10 +25,10 @@ class BinaryTree:
                 x = x.left
             else:
                 x = x.right
-        node.root = y
+        node.p = y
         if y is None:
             self.root = node
-            node.root = node
+            node.p = node
         elif node.key < y.key:
             y.left = node
         else:
