@@ -2,9 +2,9 @@ import csv
 from typing import Optional
 
 import matplotlib
+
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
-
 
 from DisjointSetList import DisjointSetList, DisjointSetListHeuristic
 from DisjointSetTree import DisjointSetTree, DisjointSetTreePathCompr
@@ -16,7 +16,7 @@ class Tester:
     def __init__(self, n: Optional[int]):  # n rappresenta la massima grandezza del grafo
         self.disjointSetN = None
         self.graphs = []
-        self.start = 2  # iniziamo da due nodi sennò ha poco senso
+        self.start = 2  # iniziamo da due nodi
         self.stop = n + 1
         for i in range(self.start, self.stop):
             self.graphs.append(RandomGraph(i))  # crea il vettore dei grafi generati randomicamente alla creazione del
@@ -25,7 +25,7 @@ class Tester:
             raise (Exception("Graphs vector creation failed"))
         print("Graph creation successful!")
         self.resultArray = []
-
+        self.labels = ["List", "List Heuristic", "Tree", "Tree p.c"]
 
     def runTests(self):
         # per ogni istanza di Disjoint set list gli applica il grafo, verifica il comportamento
@@ -42,6 +42,8 @@ class Tester:
                 results[i].append((result, end - start))
         self.saveResults(results)
         self.fillResultArray(results)
+        self.plotData(0,2)
+        self.plotData(2,4)
 
     def saveResults(self, results):
         with open('times.csv', 'w') as csvfile:
@@ -49,26 +51,31 @@ class Tester:
             filewriter.writerow(['Nodes.n', 'DisjointType', 'Union time'])
             for i in range(0, len(results)):
                 for j in range(0, len(results[i])):
-                    filewriter.writerow([i +2, j, results[i][j][1]])
+                    filewriter.writerow([i + 2, j, results[i][j][1]])
             print("SUCCESSFULLY SAVED!")
 
-    def fillResultArray (self, results):
-        n = []
-        for i in range (0, self.disjointSetN):
+    def fillResultArray(self, results):
+        for i in range(0, self.disjointSetN):
             self.resultArray.append([])
-        for i in range (self.start, self.stop):
-            n.append(i)
-        for j in range (0, self.disjointSetN):
-            for i in range (0, len(results)):
+        for j in range(0, self.disjointSetN):
+            for i in range(0, len(results)):
                 self.resultArray[j].append(results[i][j][1])
-        for i in range (0, len(self.resultArray)):
+
+    def plotData(self, start, stop):
+        n = self.fillXAxis()
+        for i in range(start, stop):
             plt.plot(n, self.resultArray[i])
-        plt.legend(["List", "List Heuristic", "Tree", "Tree p.c"], title="Tipologia Disjoint Set")
+        labels = [self.labels[lb] for lb in range(start, stop)]
+        plt.legend(labels, title="Tipologia Disjoint Set")
         plt.xlabel('Number graph nodes')
         plt.ylabel('Connected components time')
         plt.show()
 
-
+    def fillXAxis(self):
+        n = []
+        for i in range(self.start, self.stop):
+            n.append(i)
+        return n
 
     def createDisjointSets(self):
         sets = [DisjointSetList(), DisjointSetListHeuristic(), DisjointSetTree(), DisjointSetTreePathCompr()]
