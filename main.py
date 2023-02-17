@@ -7,9 +7,8 @@
 # TODO ALBERI
 # TODO SALVATAGGIO SU FILE CSV
 
-import DisjointSetTree
 from RandomGraph import RandomGraph
-import DisjointSetList
+from Tester import Tester
 
 
 def printCCResults(graph, result):
@@ -26,23 +25,6 @@ def printTreeResults(result):
 
 
 if __name__ == '__main__':
-    n = 10
-    rg = RandomGraph(n)
-
-    dsl = DisjointSetList.DisjointSetList()
-    result1 = dsl.connectedComponents(rg)
-
-    dsle = DisjointSetList.DisjointSetListHeuristic()
-    result2 = dsle.connectedComponents(rg)
-
-    printCCResults(rg, result1)
-    printCCResults(rg, result2)
-
-    dst = DisjointSetTree.DisjointSetTree()
-    result3 = dst.connectedComponents(rg)
-    print()
-    printTreeResults(result3)
-    print()
-    dstp = DisjointSetTree.DisjointSetTreePathCompr()
-    result4 = dstp.connectedComponents(rg)
-    printTreeResults(result4)
+    n = 50
+    t = Tester(n)
+    t.runTests()
