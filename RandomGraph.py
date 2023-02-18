@@ -22,13 +22,13 @@ class RandomGraph:
                 v2 = randrange(0, self.numVert)
                 if v1 != v2:
                     break
-            if self.alreadyPresent(v1,v2):
+            if self.alreadyPresent(v1, v2):
                 self.edges[i] = (v1, v2)
-                self.adjacencyList[v1].append(v2)  # riempie la lsita di adiacenza
+                self.adjacencyList[v1].append(v2)  # riempie la lista di adiacenza
                 self.adjacencyList[v2].append(v1)
         self.numEdges = len(self.edges)
 
-    def alreadyPresent (self, v1,v2):
+    def alreadyPresent(self, v1, v2):
         if v2 in self.adjacencyList[v1]:
             return False
         return True

@@ -48,11 +48,11 @@ class Tester:
         self.plotData([0,1])
         self.plotData([2,3])
         self.plotData([0,1,2,3])
-        # self.plotData([0,1,3])
-        # self.plotData([0])
-        # self.plotData([1])
-        # self.plotData([2])
-        # self.plotData([3])
+        self.plotData([0,1,3])
+        self.plotData([0])
+        self.plotData([1])
+        self.plotData([2])
+        self.plotData([3])
 
     def saveResults(self, results):
         with open('output.csv', 'w') as csvfile:
