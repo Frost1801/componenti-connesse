@@ -45,13 +45,22 @@ class Tester:
                     results[i].append((result, end - start))
         self.saveResults(results)
         self.fillResultArray(results)
-        self.plotData(0,2)
-        self.plotData(2,4)
-        self.plotData(0,4)
+        self.plotData([0,1])
+        self.plotData([2,3])
+        self.plotData([0,1,2,3])
+        # self.plotData([0,1,3])
+        # self.plotData([0])
+        # self.plotData([1])
+        # self.plotData([2])
+        # self.plotData([3])
 
     def saveResults(self, results):
-        with open('times.csv', 'w') as csvfile:
+        with open('output.csv', 'w') as csvfile:
             filewriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            for i in range (0, len(self.labels)):
+                string = [c.strip() for c in self.labels[i] .strip(', ').split(',')]
+                string.append(str(i))
+                filewriter.writerow(string)
             filewriter.writerow(['Nodes.n', 'DisjointType', 'Union time'])
             for i in range(0, len(results)):
                 for j in range(0, len(results[i])):
@@ -65,12 +74,12 @@ class Tester:
             for i in range(0, len(results)):
                 self.resultArray[j].append(results[i][j][1])
 
-    def plotData(self, start, stop):
+    def plotData(self, nums):
         colors = ['r', 'b', 'm', 'g']
         n = self.fillXAxis()
-        for i in range(start, stop):
+        for i in nums:
             plt.plot(n, self.resultArray[i], "-" + colors[i])
-        labels = [self.labels[lb] for lb in range(start, stop)]
+        labels = [self.labels[lb] for lb in nums]
         plt.legend(labels, title="Tipologia Disjoint Set")
         plt.xlabel('Number graph nodes')
         plt.ylabel('Connected components time')

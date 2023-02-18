@@ -34,14 +34,3 @@ class BinaryTree:
         else:
             y.right = node
         node.tree = self
-
-    def toArray(self):
-        arr = []
-        self._toArray(self.root, arr)
-        return arr
-
-    def _toArray(self, node, arr):
-        if node:
-            self._toArray(node.left, arr)
-            arr.append(node.key)
-            self._toArray(node.right, arr)

@@ -14,18 +14,6 @@ class LinkedList:  # set object
         self.head = node
         self.tail = node
         node.list = self  # aggiorna il valore del set object del nodo
-
-    # stampa la lista
-    def print(self):
-        node = self.head
-        while node:
-            if node.next:
-                print(node.val, end=" - ")
-            else:
-                print(node.val)
-            node = node.next
-
-
 class ExtendedLinkedList(LinkedList):
     def __init__(self, node: Optional[ListNode]):
         super().__init__(node)
