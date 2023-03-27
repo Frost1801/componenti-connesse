@@ -1,5 +1,7 @@
+from pwn import log
 import csv
 from typing import Optional
+
 
 import matplotlib
 
@@ -18,9 +20,14 @@ class Tester:
         self.graphs = []
         self.start = 2  # iniziamo da due nodi
         self.stop = n + 1
+
+        nodeCreation = log.progress("Graph created size")
+
         for i in range(self.start, self.stop):
+            nodeCreation.status(str(i))
             self.graphs.append(RandomGraph(i))  # crea il vettore dei grafi generati randomicamente alla creazione del
             # tester in modo da non perdere tempo per la creazione durante il test
+
         if len(self.graphs) != self.stop - self.start:
             raise (Exception("Graphs vector creation failed"))
         print("Graph creation successful!")
@@ -33,9 +40,12 @@ class Tester:
         sets = self.createDisjointSets()
         for i in range(0, len(self.graphs)):
             results[i] = []  # dizionario di tuple dove elemento 1 è array di risultati e l' elemento 2 è intero
-
+        size = log.progress("Node Size")
+        sType = log.progress("Structure type")
         for i in range(0, len(self.graphs)):
+            size.status(str(i))
             for j in range(0, len(sets)):
+                sType.status(str(j))
                 start = timer()
                 result = sets[j].connectedComponents(self.graphs[i])
                 end = timer()

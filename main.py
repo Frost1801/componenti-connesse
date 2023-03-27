@@ -1,5 +1,5 @@
 from Tester import Tester
 if __name__ == '__main__':
-    n = 1000
+    n = 200
     t = Tester(n)
     t.runTests()

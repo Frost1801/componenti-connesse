@@ -5,6 +5,7 @@ from LinkedList import ListNode, LinkedList, ExtendedLinkedList
 from RandomGraph import RandomGraph
 
 
+# implementazione delle componenti connesse tramite liste collegate con puntatori
 class DisjointSetList(DisjointSet):
     # restituisce una lista concatenata il cui unico elemento è x
     def makeSet(self, x: Optional[ListNode]):

@@ -1,5 +1,6 @@
 from typing import Optional
 
+
 # rappresenta un nodo della lista
 
 class ListNode:
@@ -14,6 +15,8 @@ class LinkedList:  # set object
         self.head = node
         self.tail = node
         node.list = self  # aggiorna il valore del set object del nodo
+
+
 class ExtendedLinkedList(LinkedList):
     def __init__(self, node: Optional[ListNode]):
         super().__init__(node)
